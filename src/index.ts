@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { PrismaClient } from "@prisma/client/edge";
-import { withAccelerate } from "@prisma/extension-accelerate";
-import { decode, sign, verify } from "hono/jwt";
+
+import { userRouter } from "./routes/user";
+import { blogRouter } from "./routes/blog";
 
 const app = new Hono<{
   Bindings: {
@@ -10,83 +10,7 @@ const app = new Hono<{
   };
 }>().basePath("/api/v1");
 
-app.post("/user/signup", async (c) => {
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
-
-  const body = await c.req.json();
-
-  try {
-    const user = await prisma.user.create({
-      data: {
-        email: body.email,
-        password: body.password,
-        name: body.name,
-      },
-    });
-
-    const jwt = await sign(
-      {
-        id: user.id,
-      },
-      c.env.JWT_SECRET
-    );
-
-    return c.text(jwt);
-  } catch (err) {
-    c.status(403);
-    return c.text("signup failed");
-  }
-});
-
-app.post("/user/signin", async (c) => {
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
-
-  const body = await c.req.json();
-
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: body.email,
-        password: body.password,
-      },
-      select: {
-        id: true,
-      },
-    });
-
-    if (!user) {
-      c.status(401);
-      return c.text("Incorrect email or password");
-    }
-
-    const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.text(jwt);
-  } catch (err) {
-    c.status(400);
-    return c.text("Error: " + err);
-  }
-});
-
-app.post("/blog", (c) => {
-  return c.text("blog");
-});
-
-app.put("/blog", (c) => {
-  return c.text("blog");
-});
-
-app.get("/blog/:id", (c) => {
-  const id = c.req.param("id");
-  console.log(id);
-  return c.text("blog");
-});
-
-app.get("/blog/bulk", (c) => {
-  return c.text("all blogs");
-});
+app.route("/user", userRouter);
+app.route("/blog", blogRouter);
 
 export default app;
