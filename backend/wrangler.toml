@@ -2,9 +2,9 @@ name = "backend"
 compatibility_date = "2023-12-01"
 
 [vars]
-DATABASE_URL= "your-prisma-accelerate-api-key"
+DATABASE_URL= ""
 
-JWT_SECRET = "your-jwt-secret"
+JWT_SECRET = ""
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
