@@ -18,7 +18,7 @@ blogRouter.use("/*", async (c, next) => {
 
   if (!jwt) {
     c.status(401);
-    return c.text("jwt required");
+    return c.text("You are not logged in");
   }
 
   const token = jwt.split(" ")[1];
