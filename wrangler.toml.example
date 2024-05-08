@@ -1,7 +1,0 @@
-name = "bytes"
-compatibility_date = "2023-12-01"
-
-[vars]
-DATABASE_URL= "your-prisma-accelerate-api-key"
-
-JWT_SECRET = "your-jwt-secret"
