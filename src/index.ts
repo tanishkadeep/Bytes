@@ -40,8 +40,35 @@ app.post("/user/signup", async (c) => {
   }
 });
 
-app.post("/user/signin", (c) => {
-  return c.text("signin route");
+app.post("/user/signin", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const body = await c.req.json();
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: body.email,
+        password: body.password,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!user) {
+      c.status(401);
+      return c.text("Incorrect email or password");
+    }
+
+    const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
+    return c.text(jwt);
+  } catch (err) {
+    c.status(400);
+    return c.text("Error: " + err);
+  }
 });
 
 app.post("/blog", (c) => {
