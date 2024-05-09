@@ -8,7 +8,7 @@ export const Quote = () => {
           audience."
         </div>
         <div className="text-xl font-bold text-gray-500 ">
-          Join our vibrant community. Sign up now!
+          Join our vibrant community now!
         </div>
       </div>
     </div>
