@@ -24,7 +24,7 @@ export const Signin = () => {
       });
       const jwt = response.data;
       localStorage.setItem("token", jwt);
-      navigate("/blog");
+      navigate("/blogs");
     } catch (err) {
       console.log(err);
     }
