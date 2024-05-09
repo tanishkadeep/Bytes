@@ -1,6 +1,6 @@
 export const Quote = () => {
   return (
-    <div className=" bg-gray-100 h-screen flex justify-center items-center  p-20">
+    <div className=" bg-gray-100 h-screen flex justify-center items-center p-24">
       <div>
         <div className="text-4xl font-extrabold pb-4">
           "Discover the joy of blogging with our intuitive platform. Connect

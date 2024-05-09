@@ -1,7 +1,13 @@
-export const Button = ({ type }: { type: "Signup" | "Signin" }) => {
+export const Button = ({
+  text,
+  onClick,
+}: {
+  text: string;
+  onClick: () => void;
+}) => {
   return (
     <div className="bg-black text-white text-center py-2 rounded-lg mt-4 font-semibold cursor-pointer hover:opacity-85">
-      <button>{type}</button>
+      <button onClick={onClick}>{text}</button>
     </div>
   );
 };
