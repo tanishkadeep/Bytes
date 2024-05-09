@@ -4,12 +4,31 @@ import { Quote } from "../components/Quote";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { SignHeader } from "../components/SignHeader";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export const Signin = () => {
   const [postInputs, setPostInputs] = useState<SigninInput>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+
+  async function sendRequest() {
+    try {
+      const response = await axios({
+        method: "post",
+        url: `${BACKEND_URL}/user/signin`,
+        data: postInputs,
+      });
+      const jwt = response.data;
+      localStorage.setItem("token", jwt);
+      navigate("/blog");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -36,7 +55,7 @@ export const Signin = () => {
               setPostInputs({ ...postInputs, password: e.target.value });
             }}
           ></Input>
-          <Button text="Log in" onClick={() => {}}></Button>
+          <Button text="Log in" onClick={sendRequest}></Button>
         </div>
       </div>
     </div>
