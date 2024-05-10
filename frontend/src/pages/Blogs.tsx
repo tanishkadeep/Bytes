@@ -1,5 +1,7 @@
-export const Blogs = ()=>{
-    return <div>Blogs
-        
-    </div>
-}
+import { Appbar } from "../components/Appbar";
+
+export const Blogs = () => {
+  return <div>
+    <Appbar/>
+  </div>;
+};
