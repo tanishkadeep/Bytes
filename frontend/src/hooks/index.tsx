@@ -5,7 +5,8 @@ import { BACKEND_URL } from "../config";
 interface Blog {
   title: string;
   content: string;
-  authorname: string;
+  id: string;
+  author: { name: string };
   publishedAt: string;
 }
 
@@ -24,7 +25,7 @@ export const useBlogs = () => {
         setBlogs(response.data.posts);
         setLoading(false);
       });
-  }, [blogs]);
+  }, []);
 
   return { loading, blogs };
 };

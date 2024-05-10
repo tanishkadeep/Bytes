@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
+
 interface inputs {
   title: string;
   content: string;
   authorName: string;
   publishedAt: string;
+  id: string;
 }
 
 export const BlogCard = ({
@@ -10,9 +13,10 @@ export const BlogCard = ({
   content,
   authorName,
   publishedAt,
+  id,
 }: inputs) => {
   return (
-    <div className="w-1/2">
+    <Link to={`/blog/${id}`} className="w-1/2 cursor-pointer">
       <div className="flex items-center mb-2 mt-8">
         <div className="rounded-full bg-gray-400 text-white w-7 h-7 flex justify-center items-center text-sm mr-2">
           {authorName[0]}
@@ -29,6 +33,6 @@ export const BlogCard = ({
           {Math.ceil(content.length / 150)} min read
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
