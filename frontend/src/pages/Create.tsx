@@ -11,7 +11,7 @@ export const Create = () => {
 
   async function sendRequest() {
     try {
-      await axios({
+      const response = await axios({
         method: "post",
         url: `${BACKEND_URL}/blog`,
         data: {
@@ -22,7 +22,7 @@ export const Create = () => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
-      navigate("/blogs");
+      navigate("/blog/" + response.data);
     } catch (err) {
       console.log(err);
     }
