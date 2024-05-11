@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 export const SignHeader = ({ type }: { type: "Signup" | "Signin" }) => {
   return (
-    <div className="pb-8">
+    <div className="pb-8 ">
       <div className="font-extrabold text-4xl pb-2 text-center">
         {type == "Signup" ? "Create an account" : "Log in"}
       </div>
-      <div className="flex text-gray-500 font-medium justify-center">
-        <div className="pr-1">
+      <div className="flex flex-col lg:flex-row items-center text-gray-500 font-medium justify-center">
+        <div className="pr-1 text-center">
           {type == "Signup"
             ? "Already have an account?"
             : "Don't have an account?"}
