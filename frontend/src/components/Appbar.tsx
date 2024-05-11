@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/image.jpg";
+import { Logout } from "./Logout";
 
 export const Appbar = () => {
   return (
@@ -12,7 +13,12 @@ export const Appbar = () => {
           Bytes
         </Link>
       </div>
-      <Link to={"/publish"} className="pr-8 font-medium text-lg cursor-pointer">Publish &rarr;</Link>
+      <div className="flex justify-center items-center font-medium text-lg cursor-pointer pr-8">
+        <Link to={"/publish"} className="pr-8 hover:text-gray-300">
+          Publish &rarr;
+        </Link>
+        <Logout />
+      </div>
     </div>
   );
 };
