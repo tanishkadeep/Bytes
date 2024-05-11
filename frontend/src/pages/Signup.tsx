@@ -2,7 +2,7 @@ import { Quote } from "../components/Quote";
 import { SignHeader } from "../components/SignHeader";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SignupInput } from "@tanishkadeep/bytes-common";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
@@ -17,6 +17,13 @@ export const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/blogs");
+    }
+  }, []);
 
   async function sendRequest() {
     try {

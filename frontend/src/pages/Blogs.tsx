@@ -1,10 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { HomePageSkeleton } from "../components/HomePageSkeleton";
 import { useBlogs } from "../hooks";
+import { useEffect } from "react";
 
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/signin");
+    }
+  }, []);
 
   function getRandomDate(): string {
     const startDate: number = new Date("2020-01-01").getTime();

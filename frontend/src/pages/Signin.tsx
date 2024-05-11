@@ -1,5 +1,5 @@
 import { SigninInput } from "@tanishkadeep/bytes-common";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Quote } from "../components/Quote";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
@@ -16,6 +16,13 @@ export const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/blogs");
+    }
+  }, []);
 
   async function sendRequest() {
     try {
