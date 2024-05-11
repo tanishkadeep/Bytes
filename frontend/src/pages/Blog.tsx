@@ -1,3 +1,10 @@
+import { Appbar } from "../components/Appbar";
+
 export const Blog = () => {
-  return <div>Blog</div>;
+  return (
+    <div>
+      <Appbar />
+      Blog
+    </div>
+  );
 };
