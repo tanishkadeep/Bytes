@@ -130,7 +130,7 @@ blogRouter.get("/:id", async (c) => {
   }).$extends(withAccelerate());
 
   try {
-    const posts = await prisma.post.findMany({
+    const post = await prisma.post.findFirst({
       where: {
         id,
       },
@@ -144,8 +144,8 @@ blogRouter.get("/:id", async (c) => {
         },
       },
     });
-    if (!posts) return c.text("No blogs");
-    return c.json({ posts });
+    if (!post) return c.text("No blog");
+    return c.json({ post });
   } catch (e) {
     c.status(400);
     return c.text("error while fetching blogs: " + e);
