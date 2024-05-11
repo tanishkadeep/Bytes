@@ -137,6 +137,11 @@ blogRouter.get("/:id", async (c) => {
       select: {
         title: true,
         content: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
     if (!posts) return c.text("No blogs");
