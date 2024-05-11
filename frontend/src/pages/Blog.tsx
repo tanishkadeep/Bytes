@@ -22,7 +22,7 @@ export const Blog = () => {
     <div>
       <Appbar />
       <div className="flex flex-col items-center ">
-        <div className="w-1/2 mt-28">
+        <div className="w-1/2 mt-28 mb-20">
           <div className="font-extrabold text-5xl">{blog?.title}</div>
           <div className="mt-8">
             <div className="flex items-center text-gray-700 border-b-2 pb-5 border-gray-100">
@@ -31,7 +31,7 @@ export const Blog = () => {
               </div>
               <div className="">{blog?.author.name}</div>
               <div className="text-sm pl-2">
-                &#x2022; {Math.ceil((blog?.content?.length || 0) / 150)} min
+                &#x2022; {Math.ceil((blog?.content?.length || 0) / 700)} min
                 read
               </div>
             </div>

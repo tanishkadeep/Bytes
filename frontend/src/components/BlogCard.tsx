@@ -30,7 +30,7 @@ export const BlogCard = ({
       </div>
       <div className="pb-8 border-b-2 border-gray-100">
         <div className="bg-gray-100 text-xs w-fit font-medium rounded-xl px-2 py-1">
-          {Math.ceil(content.length / 150)} min read
+          {Math.ceil(content.length / 700)} min read
         </div>
       </div>
     </Link>
