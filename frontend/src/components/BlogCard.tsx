@@ -22,7 +22,7 @@ export const BlogCard = ({
           {authorName[0]}
         </div>
         <div className="font-semibold pr-2">{authorName} </div>
-        <div className="text-gray-700">&#x2022; {publishedAt}</div>
+        <div className="text-gray-700 text-sm">&#x2022; {publishedAt}</div>
       </div>
       <div className="font-extrabold text-3xl mb-3">{title}</div>
       <div className="font-medium font-serif pb-4">

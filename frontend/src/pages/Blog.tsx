@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
 import { useBlog } from "../hooks";
+import { BlogSkeleton } from "../components/BlogSkeleton";
 
 export const Blog = () => {
   const { id } = useParams();
@@ -12,9 +13,7 @@ export const Blog = () => {
     return (
       <div>
         <Appbar />
-        <div className="font-extrabold text-3xl flex justify-center items-center h-screen">
-          loading...
-        </div>
+        <BlogSkeleton />
       </div>
     );
   }
