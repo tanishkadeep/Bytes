@@ -14,10 +14,13 @@ export const Signup = () => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   async function sendRequest() {
     try {
+      setIsLoading(true);
+
       const response = await axios({
         method: "post",
         url: `${BACKEND_URL}/user/signup`,
@@ -29,6 +32,8 @@ export const Signup = () => {
       navigate("/blogs");
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -61,7 +66,11 @@ export const Signup = () => {
               setPostInputs({ ...postInputs, password: e.target.value });
             }}
           ></Input>
-          <Button text="Sign up" onClick={sendRequest}></Button>
+          <Button
+            text={isLoading ? "Loading..." : "Sign up"}
+            onClick={sendRequest}
+            disabled={isLoading}
+          ></Button>
         </div>
       </div>
 
