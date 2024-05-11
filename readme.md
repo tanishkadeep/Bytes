@@ -1,6 +1,6 @@
 # Bytes
 
-Welcome to Bytes, a full-stack blogging web application. This README provides a comprehensive guide to understanding and contributing to the project. The app is deployed and can be accessed at [Bytes](https://bytes-kohl.vercel.app/signin).
+Welcome to Bytes, a full-stack blogging web application. This README provides a comprehensive guide to understanding and contributing to the project. The app is deployed and can be accessed at [Bytes](https://bytes-kohl.vercel.app).
 
 ## Table of Contents
 
