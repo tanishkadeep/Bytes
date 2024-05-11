@@ -14,11 +14,13 @@ export const Signin = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   async function sendRequest() {
     try {
       setIsLoading(true);
+      setError(null);
 
       const response = await axios({
         method: "post",
@@ -29,8 +31,12 @@ export const Signin = () => {
       const jwt = response.data;
       localStorage.setItem("token", jwt);
       navigate("/blogs");
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      if (err.response) {
+        setError(err.response.data);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -44,7 +50,6 @@ export const Signin = () => {
       <div className="w-screen lg:w-1/2 flex justify-center items-center">
         <div className="w-1/2">
           <SignHeader type="Signin"></SignHeader>
-
           <Input
             title="Email"
             placeholder="user@example.com"
@@ -61,6 +66,9 @@ export const Signin = () => {
               setPostInputs({ ...postInputs, password: e.target.value });
             }}
           ></Input>
+          {error && (
+            <p className="text-red-500 font-bold text-center mb-2">{error}</p>
+          )}{" "}
           <Button
             text={isLoading ? "Loading..." : "Log in"}
             onClick={sendRequest}

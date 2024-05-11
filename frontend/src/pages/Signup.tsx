@@ -15,23 +15,31 @@ export const Signup = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   async function sendRequest() {
     try {
       setIsLoading(true);
+      setError(null);
 
-      const response = await axios({
-        method: "post",
-        url: `${BACKEND_URL}/user/signup`,
-        data: postInputs,
-      });
+      const response = await axios.post(
+        `${BACKEND_URL}/user/signup`,
+        postInputs
+      );
 
       const jwt = response.data;
       localStorage.setItem("token", jwt);
       navigate("/blogs");
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      if (err.response) {
+        console.log(err.response);
+        if (err.response.data === "Incorrect Inputs")
+          setError("Invalid email or password. Please try again");
+        else setError(err.response.data);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -66,6 +74,12 @@ export const Signup = () => {
               setPostInputs({ ...postInputs, password: e.target.value });
             }}
           ></Input>
+          <div className="text-gray-400 mb-4">
+            *Password length must be atleast 8 characters
+          </div>
+          {error && (
+            <p className="text-red-500 font-bold text-center mt-4">{error}</p>
+          )}{" "}
           <Button
             text={isLoading ? "Loading..." : "Sign up"}
             onClick={sendRequest}
